@@ -1,0 +1,28 @@
+pipeline{
+agent any
+	stages{
+		stage('Build'){
+			steps{
+					echo "Build the project from SCM->GitRepo...."
+					bat "mvn clean"
+				}
+		}
+		
+		stage('Install'){
+			steps{
+				echo "Compiling the project..."
+				bat "mvn install"
+			}
+		}
+		
+		stage('Test'){
+		steps{
+				echo "Running the test cases...."
+				bat "mvn test"
+			}
+		}
+		
+		
+	}
+
+}
