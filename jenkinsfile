@@ -16,10 +16,10 @@ agent any
 		}
 		
 		stage('Test'){
-		steps{
-				echo "Running the test cases...."
-				bat "mvn test"
-			}
+			steps{
+					echo "Running the test cases...."
+					bat "mvn test"
+				}
 		}
 		
 		stage("Copy"){
@@ -31,8 +31,7 @@ agent any
 		        targetLocation: "C:\\output"
 		        )])
 	        }
-      }
-}
+	    }
 		
 	}
 
