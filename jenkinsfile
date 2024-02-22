@@ -28,7 +28,7 @@ agent any
             echo 'Copying the jar file from target folder....'
             bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
             
-            bat "powershell -command Send-PowerShellServerFile -Server 20.41.216.213 -AuthMode password -User sanjoyde -Password Sunanda@Paul -RemoteFile /home/projects/ -LocalFile 'target\\*.jar'"
+            bat "powershell -command scp -r 'C:\\Sofrwares\\Executable Jars\\' sanjoyde@20.41.216.213:/home"
         }
     }
 
