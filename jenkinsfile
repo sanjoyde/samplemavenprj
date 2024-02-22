@@ -20,10 +20,19 @@ agent any
 				echo "Running the test cases...."
 				bat "mvn test"
 			}
-			
-			
 		}
 		
+		stage("Copy"){
+      		steps {
+		        fileOperations([fileCopyOperation(
+		        excludes: '',
+		        flattenFiles: false,
+		        includes: '**/*.jar',
+		        targetLocation: "C:\\output"
+		        )])
+	        }
+      }
+}
 		
 	}
 
