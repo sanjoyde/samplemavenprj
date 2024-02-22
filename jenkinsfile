@@ -26,7 +26,7 @@ agent any
 	post { 
         always { 
             echo 'Copying the jar file from target folder....'
-            bat "powershell -command Copy-Item -Path 'target\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
+            bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
         }
     }
 
