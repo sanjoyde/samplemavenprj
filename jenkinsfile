@@ -29,7 +29,7 @@ agent any
         		pushremote()
     		}
     	}
-    	
+    }
 		def pushremote(){
 			def remote = [:]
 						remote.name = 'sanjoyde@20.41.216.213'
@@ -42,16 +42,12 @@ agent any
 		}
 		
 			
-	}
+
 	
 	post { 
         always { 
-            echo 'Copying the jar file from target folder....'
-            bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
-		            def push_file(){
-			            
-    		}
-        }
-    }
-
+	            echo 'Copying the jar file from target folder....'
+	            bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
+        		}
+    	 }
 }
