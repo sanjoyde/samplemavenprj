@@ -22,14 +22,6 @@ agent any
 				}
 		}
 		
-		stage('Remote SSH'){
-		
-			steps{
-					echo push_file()
-					
-					
-			}
-		}	
 		
 			
 	}
@@ -39,14 +31,14 @@ agent any
             echo 'Copying the jar file from target folder....'
             bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
 		            def push_file(){
-		            def remote = [:]
-					remote.name = 'sanjoyde@20.41.216.213'
-					remote.host = '20.41.216.213'
-					remote.user = 'sanjoyde'
-					remote.password = 'Sunanda@Paul'
-					remote.allowAnyHosts = true
-            writeFile file: 'target\\*.jar', text: 'ls -lrt'
-    		sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
+			            def remote = [:]
+						remote.name = 'sanjoyde@20.41.216.213'
+						remote.host = '20.41.216.213'
+						remote.user = 'sanjoyde'
+						remote.password = 'Sunanda@Paul'
+						remote.allowAnyHosts = true
+			            writeFile file: 'target\\*.jar', text: 'ls -lrt'
+			    		sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
     		}
         }
     }
