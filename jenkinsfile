@@ -12,6 +12,7 @@ agent any
 			steps{
 				echo "Compiling the project..."
 				bat "mvn install"
+				
 			}
 		}
 		
@@ -34,8 +35,8 @@ agent any
 						remote.user = 'sanjoyde'
 						remote.password = 'Sunanda@Paul'
 						remote.allowAnyHosts = true
-			            writeFile file: 'target\\', text: 'ls -lrt'
-			    		sshPut remote: remote, from: 'target\\', into: '/home/projects/'
+			            writeFile file: '**/target/*.jar', text: 'ls -lrt'
+			    		sshPut remote: remote, from: '**/target/*.jar', into: '/home/projects/'
         		
         			}
     			}
