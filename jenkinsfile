@@ -27,9 +27,9 @@ agent any
 		stage ('Checkout') {
 			steps{
 				echo "I am here..........."
-        		dir('samplemavenprj'){
+        		
         			archiveArtifacts 'target/*.jar'
-        		}
+        		
         		script{
         			def remote = [:]
 						remote.name = 'sanjoyde@20.41.216.213'
