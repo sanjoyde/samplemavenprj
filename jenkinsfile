@@ -1,5 +1,5 @@
 pipeline{
-node{
+node(){
 		def remote = [:]
 		remote.name = 'sanjoyde@20.41.216.213'
 		remote.host = '20.41.216.213'
