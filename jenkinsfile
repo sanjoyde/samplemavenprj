@@ -20,6 +20,19 @@ agent any
 					echo "Running the test cases...."
 					bat "mvn test"
 				}
+		}
+		
+		stage('Remote SSH'){
+		
+			steps{
+			
+					def remote = [:]
+					remote.name = 'sanjoyde@20.41.216.213'
+					remote.host = '20.41.216.213'
+					remote.user = 'sanjoyde'
+					remote.password = 'Sunanda@Paul'
+					remote.allowAnyHosts = true
+			}
 		}		
 	}
 	
@@ -28,7 +41,8 @@ agent any
             echo 'Copying the jar file from target folder....'
             bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
             
-            bat "powershell -command scp -r 'C:\\Sofrwares\\Executable Jars\\' sanjoyde@20.41.216.213:/home"
+            writeFile file: 'target\\*.jar', text: 'ls -lrt'
+    		sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
         }
     }
 
