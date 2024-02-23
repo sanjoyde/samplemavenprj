@@ -27,7 +27,9 @@ agent any
 		stage ('Checkout') {
 			steps{
 				echo "I am here..........."
-        		
+        		dir('samplemavenprj'){
+        			archiveArtifacts 'target/*.jar'
+        		}
         		script{
         			def remote = [:]
 						remote.name = 'sanjoyde@20.41.216.213'
@@ -35,11 +37,12 @@ agent any
 						remote.user = 'sanjoyde'
 						remote.password = 'Sunanda@Paul'
 						remote.allowAnyHosts = true
-			            writeFile file: '/target/samplemavenprj-0.0.1-SNAPSHOT.jar', text: 'ls -lrt'
-			    		sshPut remote: remote, from: '/target/samplemavenprj-0.0.1-SNAPSHOT.jar', into: '/home/projects/'
+			            writeFile file: 'target/*.jar', text: 'ls -lrt'
+			    		sshPut remote: remote, from: 'target/*.jar', into: '/home/projects/'
         		
         			}
     			}
+    			
     		}
     	}
 }
