@@ -1,52 +1,36 @@
 pipeline{
-agent any
-	stages{
+node{
+		def remote = [:]
+		remote.name = 'sanjoyde@20.41.216.213'
+		remote.host = '20.41.216.213'
+		remote.user = 'sanjoyde'
+		remote.password = 'Sunanda@Paul'
+		remote.allowAnyHosts = true
+		
 		stage('Build'){
-			steps{
-					echo "Build the project from SCM->GitRepo...."
-					bat "mvn clean"
-				}
+				echo "Build the project from SCM->GitRepo...."
+				bat "mvn clean"
+			
 		}
 		
 		stage('Install'){
-			steps{
 				echo "Compiling the project..."
 				bat "mvn install"
-			}
+			
 		}
 		
 		stage('Test'){
-			steps{
 					echo "Running the test cases...."
 					bat "mvn test"
-				}
 		}
 		
 		
 		stage ('pushremote') {
-			steps{
+			
 				echo "I am here..........."
-        		
-        		
-        		def remote = [:]
-						remote.name = 'sanjoyde@20.41.216.213'
-						remote.host = '20.41.216.213'
-						remote.user = 'sanjoyde'
-						remote.password = 'Sunanda@Paul'
-						remote.allowAnyHosts = true
-			            writeFile file: 'target\\*.jar', text: 'ls -lrt'
-			    		sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
-    		}
+        		writeFile file: 'target\\*.jar', text: 'ls -lrt'
+			    sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
+    		
     	}
-    }
-		
-	
-	post { 
-        always { 
-	            echo 'Copying the jar file from target folder....'
-	            bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
-        		
-        		remote()
-        		}
-    	 }
+	}
 }
