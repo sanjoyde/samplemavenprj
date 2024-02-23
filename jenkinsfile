@@ -1,36 +1,42 @@
 pipeline{
-node(){
-		def remote = [:]
-		remote.name = 'sanjoyde@20.41.216.213'
-		remote.host = '20.41.216.213'
-		remote.user = 'sanjoyde'
-		remote.password = 'Sunanda@Paul'
-		remote.allowAnyHosts = true
-		
-		stage('Build'){
-				echo "Build the project from SCM->GitRepo...."
-				bat "mvn clean"
+agent{
+
+		stages{	
+			stage('Build'){
+				steps{
+					echo "Build the project from SCM->GitRepo...."
+					bat "mvn clean"
+				}
+			}
 			
-		}
-		
-		stage('Install'){
-				echo "Compiling the project..."
-				bat "mvn install"
+			stage('Install'){
+				steps{
+					echo "Compiling the project..."
+					bat "mvn install"
+				}
+			}
 			
-		}
-		
-		stage('Test'){
-					echo "Running the test cases...."
-					bat "mvn test"
-		}
-		
-		
-		stage ('pushremote') {
-			
-				echo "I am here..........."
-        		writeFile file: 'target\\*.jar', text: 'ls -lrt'
-			    sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
-    		
+			stage('Test'){
+				steps{
+						echo "Running the test cases...."
+						bat "mvn test"
+					}
+			}
+	
     	}
+	
+		node{
+			stage ('pushremote') {
+				def remote = [:]
+				remote.name = 'sanjoyde@20.41.216.213'
+				remote.host = '20.41.216.213'
+				remote.user = 'sanjoyde'
+				remote.password = 'Sunanda@Paul'
+				remote.allowAnyHosts = true
+				echo "I am here..........."
+		        writeFile file: 'target\\*.jar', text: 'ls -lrt'
+				sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
+    			}
+    		}
 	}
 }
