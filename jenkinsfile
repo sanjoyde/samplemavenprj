@@ -23,15 +23,12 @@ agent any
 		}
 		
 		
-		stage ('Checkout') {
+		stage ('pushremote') {
 			steps{
 				echo "I am here..........."
-        		pushremote()
-    		}
-    	}
-    }
-		def pushremote(){
-			def remote = [:]
+        		
+        		
+        		def remote = [:]
 						remote.name = 'sanjoyde@20.41.216.213'
 						remote.host = '20.41.216.213'
 						remote.user = 'sanjoyde'
@@ -39,15 +36,17 @@ agent any
 						remote.allowAnyHosts = true
 			            writeFile file: 'target\\*.jar', text: 'ls -lrt'
 			    		sshPut remote: remote, from: 'target\\*.jar', into: '/home/projects/'
-		}
+    		}
+    	}
+    }
 		
-			
-
 	
 	post { 
         always { 
 	            echo 'Copying the jar file from target folder....'
 	            bat "powershell -command Copy-Item -Path 'target\\*.jar' -Destination 'C:\\Sofrwares\\Executable Jars\\' -Recurse"
+        		
+        		remote()
         		}
     	 }
 }
