@@ -25,7 +25,8 @@ agent any
 		
 		stage ('Checkout') {
 			steps{
-        		pushremote( checkout stuff here )
+				echo "I am here..........."
+        		pushremote()
     		}
     	}
     	
