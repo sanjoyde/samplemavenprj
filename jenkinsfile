@@ -37,8 +37,8 @@ agent any
 						remote.user = 'sanjoyde'
 						remote.password = 'Sunanda@Paul'
 						remote.allowAnyHosts = true
-			            writeFile file: 'target/*.jar', text: 'ls -lrt'
-			    		sshPut remote: remote, from: 'target/*.jar', into: '/home/projects/'
+			            writeFile file: 'target/samplemavenprj-0.0.1-SNAPSHOT.jar', text: 'ls -lrt'
+			    		sshPut remote: remote, from: 'target/samplemavenprj-0.0.1-SNAPSHOT.jar', into: '/home/projects/'
         		
         			}
     			}
